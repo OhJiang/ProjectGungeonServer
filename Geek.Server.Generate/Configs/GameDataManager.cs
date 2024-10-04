@@ -62,10 +62,10 @@ namespace Geek.Server.Config
 		
 		public void LoadAll(bool forceReload = false)
 		{
-			LoadOneBean(t_testContainer.BinType, forceReload);
-			LoadOneBean(t_test2Container.BinType, forceReload);
-			LoadOneBean(t_languageContainer.BinType, forceReload);
-			LoadOneBean(t_itemContainer.BinType, forceReload);
+			// LoadOneBean(t_testContainer.BinType, forceReload);
+			// LoadOneBean(t_test2Container.BinType, forceReload);
+			// LoadOneBean(t_languageContainer.BinType, forceReload);
+			// LoadOneBean(t_itemContainer.BinType, forceReload);
 			//@*@*@
 		}
 		
