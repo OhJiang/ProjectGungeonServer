@@ -5,10 +5,10 @@ using MessagePack;
 namespace Geek.Server.Proto
 {
 	[MessagePackObject(true)]
-	public class HearBeat : Message
+	public class ResAccountLogin : Message
 	{
 		[IgnoreMember]
-		public const int Sid = 1575482382;
+		public const int Sid = -1342419148;
 
 		[IgnoreMember]
 		public const int MsgID = Sid;
@@ -16,8 +16,11 @@ namespace Geek.Server.Proto
 		public override int MsgId => MsgID;
 
 		/// <summary>
-		/// 当前时间
+		/// 登陆结果，0成功，其他时候为错误码
 		/// </summary>
-		public long TimeTick { get; set; }
+		public int Code { get; set; }
+
+		public UserInfo UserInfo { get; set; }
+		public string CustomToken { get; set; }
 	}
 }

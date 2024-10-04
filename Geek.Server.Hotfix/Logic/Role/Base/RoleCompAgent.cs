@@ -9,7 +9,6 @@ using Geek.Server.Core.Hotfix.Agent;
 using Geek.Server.Core.Net.BaseHandler;
 using Geek.Server.Core.Timer;
 using Server.Logic.Common.Handler;
-using Server.Logic.Logic.Role.Bag;
 using Server.Logic.Logic.Server;
 
 namespace Server.Logic.Logic.Role.Base
@@ -52,7 +51,6 @@ namespace Server.Logic.Logic.Role.Base
                 State.VipLevel = 1;
                 State.RoleName = new System.Random().Next(1000, 10000).ToString();//随机给一个
                 //激活背包组件
-                await GetCompAgent<BagCompAgent>();
             }
             State.LoginTime = DateTime.Now;
             return BuildLoginMsg();
@@ -77,7 +75,6 @@ namespace Server.Logic.Logic.Role.Base
                 {
                     CreateTime = State.CreateTime.Ticks,
                     Level = State.Level,
-                    RoleId = State.RoleId,
                     RoleName = State.RoleName,
                     VipLevel = State.VipLevel
                 }

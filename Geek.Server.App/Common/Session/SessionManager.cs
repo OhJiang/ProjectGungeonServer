@@ -2,6 +2,7 @@
 using Geek.Server.App.Common.Event;
 using Geek.Server.Core.Actors;
 using Geek.Server.Core.Events;
+using Geek.Server.Core.Net;
 using Geek.Server.Core.Net.BaseHandler;
 using Geek.Server.Proto;
 using NLog;
@@ -45,6 +46,16 @@ namespace Geek.Server.App.Common.Session
         {
             sessionMap.TryGetValue(id, out Session session);
             return session;
+        }
+
+        /// <summary>
+        /// 根据chanel 获取AccountId
+        /// </summary>
+        /// <param name="channel">通道</param>
+        /// <returns>账号Id</returns>
+        public static long GetAccountId(NetChannel channel)
+        {
+            return channel.GetData<long>(SESSIONID);
         }
 
         public static void Add(Session session)

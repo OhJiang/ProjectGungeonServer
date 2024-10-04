@@ -35,6 +35,7 @@ namespace Geek.Server.Core.Storage
 
         public void AfterSaveToDB()
         {
+            stateHash ??= new StateHash(this);
             stateHash.AfterSaveToDB();
         }
         #endregion

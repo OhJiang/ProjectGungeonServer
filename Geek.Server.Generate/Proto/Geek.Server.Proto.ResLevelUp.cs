@@ -15,9 +15,9 @@ namespace Geek.Server.Proto
 		[IgnoreMember]
 		public override int MsgId => MsgID;
 
-        /// <summary>
-        /// 玩家等级
-        /// </summary>
-        public int Level { get; set; }
+		/// <summary>
+		/// 玩家等级
+		/// </summary>
+		public int Level { get; set; }
 	}
 }

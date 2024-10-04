@@ -56,7 +56,7 @@ namespace Geek.Server.Core.Storage
             return state;
         }
 
-        public async Task SaveState<TState>(TState state) where TState : CacheState
+        public async Task<TState> SaveState<TState>(TState state) where TState : CacheState
         {
             var filter = Builders<TState>.Filter.Eq(CacheState.UniqueId, state.Id);
             var stateName = typeof(TState).FullName;
@@ -66,8 +66,25 @@ namespace Geek.Server.Core.Storage
             {
                 state.AfterSaveToDB();
             }
+
+            return state;
         }
 
+        public async Task<TState> LoadState<TState, TValue1, TValue2>(string field1, TValue1 value1, string field2,
+            TValue2 value2, Func<TState> defaultGetter = null) where TState : CacheState, new()
+        {
+            var filter = Builders<TState>.Filter.Eq(field1, value1) & Builders<TState>.Filter.Eq(field2, value2);
+            var stateName = typeof(TState).FullName;
+            var col = CurDB.GetCollection<TState>(stateName);
+            var state = await col.Find(filter).Limit(1).FirstOrDefaultAsync();
+            if (state != null)
+            {
+                state.AfterLoadFromDB();
+                return state;
+            }
+            // 如果找不到状态，则返回默认值或通过提供的 defaultGetter 创建新状态
+            return  null;
+        }
 
         public void Close()
         {
