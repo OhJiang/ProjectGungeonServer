@@ -1,8 +1,8 @@
 ﻿{
   "IsDebug": true,
-  "ServerId": 1001, //[1000,9999]
-  "ServerName": "geek_server",
-  "LocalIp": "192.168.0.99",
+  "ServerId": 1001,
+  "ServerName": "projectgungeon_server",
+  "LocalIp": "127.0.0.1",
   "TcpPort": 8899,
   "HttpCode": "inner_httpcode",
   "HttpPort": 20000,
@@ -10,5 +10,5 @@
   "WebSocketUrl": "http://*:443", 
   "SDKType": 0, 
   "MongoUrl": "mongodb://127.0.0.1:27017/?authSource=admin",
-  "MongoDBName": "geek_server"
+  "MongoDBName": "projectgungeon_server"
 }
