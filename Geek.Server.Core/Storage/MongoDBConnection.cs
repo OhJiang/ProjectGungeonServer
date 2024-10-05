@@ -86,6 +86,11 @@ namespace Geek.Server.Core.Storage
             return  null;
         }
 
+        public StateQueryBuilder<TState> CreateQueryBuilder<TState>() where TState : CacheState, new()
+        {
+            return new StateQueryBuilder<TState>(CurDB);
+        }
+
         public void Close()
         {
             Client.Cluster.Dispose();

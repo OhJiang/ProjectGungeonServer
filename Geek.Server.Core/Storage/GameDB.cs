@@ -8,6 +8,7 @@
         public Task<TState> LoadState<TState>(long id, Func<TState> defaultGetter = null) where TState : CacheState, new();
         public Task<TState> SaveState<TState>(TState state) where TState : CacheState;
         public Task<TState> LoadState<TState, TValue1, TValue2>(string field1, TValue1 value1, string field2, TValue2 value2, Func<TState> defaultGetter = null) where TState : CacheState, new();
+        public StateQueryBuilder<TState> CreateQueryBuilder<TState>() where TState : CacheState, new();
     }
 
     public class GameDB
@@ -55,6 +56,11 @@
         public static Task<TState> LoadState<TState, TValue1, TValue2>(string field1, TValue1 value1, string field2, TValue2 value2, Func<TState> defaultGetter = null) where TState : CacheState, new()
         {
             return dbImpler.LoadState<TState, TValue1, TValue2>(field1, value1, field2, value2,defaultGetter);
+        }
+
+        public static StateQueryBuilder<TState> CreateQueryBuilder<TState>() where TState : CacheState, new()
+        {
+            return dbImpler.CreateQueryBuilder<TState>();
         }
     }
 }

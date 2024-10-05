@@ -25,8 +25,8 @@ namespace Geek.Server.App.Logic.Account
 		public string UserIcon = string.Empty;//头像
 		public int UserStatus = 0;//状态,0为正常，1为封号
 		public int CostCount;//消费次数
-		public DateTime CreateTime = DateTime.UtcNow;
-		public DateTime LoginTime = DateTime.UtcNow;
+		public DateTime CreateTime = DateTime.Now;
+		public DateTime LoginTime = DateTime.Now;
 		public DateTime OfflineTime;
 		//这里设定每个账号在1个房间只有能创建1个角色 
 		public long RoomId = 0;

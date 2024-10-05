@@ -1,6 +1,5 @@
 ﻿using Geek.Server.Core.Net.BaseHandler;
 using Geek.Server.Core.Net.Tcp.Handler;
-using Server.Logic.Manager;
 
 namespace Server.Logic.Logic.Account
 {

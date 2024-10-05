@@ -23,4 +23,23 @@ namespace Geek.Server.App.Common
 		FuncNotOpen, //功能未开启，主消息屏蔽
 		Other, //其他
 	}
+
+	public class Platform
+	{
+		public const string ANDROID = "android";
+		public const string IOS = "ios";
+		public const string UNITY = "unity";
+
+		public static bool IsNotSpecifiedPlatform(string platform)
+		{
+			return platform is not ANDROID and not IOS and not UNITY;
+		}
+	}
+
+	public enum SdkType
+	{
+		GooglePlay = 0,
+		Apple = 1,
+		Guest = 2
+	}
 }

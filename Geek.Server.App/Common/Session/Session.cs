@@ -29,5 +29,29 @@ namespace Geek.Server.App.Common.Session
         {
             Channel?.Write(msg);
         }
+        
+        public Session SetId(long id)
+        {
+            Id = id;
+            return this;
+        }
+        
+        public Session SetSign(string sign)
+        {
+            Sign = sign;
+            return this;
+        }
+        
+        public Session SetChannel(NetChannel channel)
+        {
+            Channel = channel;
+            return this;
+        }
+        
+        public Session SetTime(DateTime time)
+        {
+            Time = time;
+            return this;
+        }
     }
 }
