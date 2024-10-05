@@ -69,27 +69,8 @@ namespace Geek.Server.TestPressure.Logic
                 netChannel = new ClientTcpChannel(socket, OnRevice);
                 _ = netChannel.StartAsync();
             }
-
-
-            await ReqLogin();
         }
 
-        private Task<bool> ReqLogin()
-        {
-            //登陆
-            var req = new ReqLogin();
-            req.SdkType = 0;
-            req.SdkToken = "555";
-            req.UserName = "name" + id;
-            req.Device = new Random().NextInt64().ToString();
-            req.Platform = "android";
-            return SendMsgAndWaitBack(req);
-        }
-
-        
-
-
-         
         async Task<bool> SendMsgAndWaitBack(Message msg)
         {
             msg.UniId = (int)id*10000 +  msgUniId++;

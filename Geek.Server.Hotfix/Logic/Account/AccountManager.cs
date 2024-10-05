@@ -65,7 +65,7 @@ namespace Server.Logic.Logic.Account
 				if (accountLoggedIn != null)
 				{
 					//已经登陆过了
-					var resAccountLoggedIn = BuildLoginMsg(accountLoggedIn, string.Empty);
+					var resAccountLoggedIn = await BuildLoginMsg(accountLoggedIn, string.Empty);
 					channel.Write(resAccountLoggedIn, reqAccountCusLogin.UniId);
 					return;
 				}
@@ -89,7 +89,7 @@ namespace Server.Logic.Logic.Account
 
 			await BuildLoginMsgAndAddOnlineRole(channel, accountState, string.Empty, false, reqAccountCusLogin.UniId);
 		}
-
+		
 		private bool VerifyTokenAndTryCatchExceptions(NetChannel channel, ReqAccountCusLogin reqAccountCusLogin, ref long accountId)
 		{
 			try
@@ -130,7 +130,7 @@ namespace Server.Logic.Logic.Account
 		private async Task BuildLoginMsgAndAddOnlineRole(NetChannel channel, AccountState account, string token, bool isNewUser, int reqUniId)
 		{
 			// 构建登录响应消息并发送给客户端
-			var resAccountLogin = BuildLoginMsg(account, token, isNewUser);
+			var resAccountLogin = await BuildLoginMsg(account, token, isNewUser);
 			channel.Write(resAccountLogin, reqUniId);
 
 			// 加入在线玩家列表
@@ -138,7 +138,7 @@ namespace Server.Logic.Logic.Account
 			await serverComp.AddOnlineRole(account.Id);
 		}
 
-		private ResAccountLogin BuildLoginMsg(AccountState accountState, string token, bool isNewUser = false)
+		private async Task<ResAccountLogin> BuildLoginMsg(AccountState accountState, string token, bool isNewUser = false)
 		{
 			var res = new ResAccountLogin()
 			{
@@ -159,6 +159,8 @@ namespace Server.Logic.Logic.Account
 				},
 				CustomToken = token
 			};
+			accountState.LoginTime = DateTime.Now;
+			await GameDB.SaveState(accountState);
 			return res;
 		}
 

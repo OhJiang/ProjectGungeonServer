@@ -3,7 +3,7 @@ using Geek.Server.Core.Actors;
 using Geek.Server.Core.Hotfix.Agent;
 using Geek.Server.Core.Timer.Handler;
 using Geek.Server.Core.Utils;
-using Server.Logic.Logic.Role.Base;
+using Server.Logic.Logic.Account;
 
 namespace Server.Logic.Logic.Server
 {
@@ -50,14 +50,14 @@ namespace Server.Logic.Logic.Server
             return ValueTask.CompletedTask;
         }
 
-        public static async Task OnlineRoleForeach(Action<RoleCompAgent> func)
+        public static async Task OnlineRoleForeach(Action<AccountCompAgent> func)
         {
             var serverComp = await ActorMgr.GetCompAgent<ServerCompAgent>();
             serverComp.Tell(async () =>
             {
                 foreach (var roleId in serverComp.Comp.OnlineSet)
                 {
-                    var roleComp = await ActorMgr.GetCompAgent<RoleCompAgent>(roleId);
+                    var roleComp = await ActorMgr.GetCompAgent<AccountCompAgent>(roleId);
                     roleComp.Tell(() => func(roleComp));
                 }
             });

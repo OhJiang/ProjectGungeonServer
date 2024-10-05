@@ -62,7 +62,7 @@ namespace Geek.Server.App.Common
 
                 //mongodb bson
                 BsonClassMapHelper.SetConvention();
-                BsonClassMapHelper.RegisterAllClass(typeof(ReqLogin).Assembly);
+                BsonClassMapHelper.RegisterAllClass(typeof(ReqAccountLogin).Assembly);
                 BsonClassMapHelper.RegisterAllClass(typeof(Program).Assembly);
 
                 return true;
