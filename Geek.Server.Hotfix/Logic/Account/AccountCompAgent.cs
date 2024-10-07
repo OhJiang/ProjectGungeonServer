@@ -34,7 +34,6 @@ namespace Server.Logic.Logic.Account
 			//移除在线玩家
 			Log.Debug($"玩家下线:{ActorId}");
 			State.OfflineTime = DateTime.Now;
-			await GameDB.SaveState(State);
 			var serverComp = await ActorMgr.GetCompAgent<ServerCompAgent>();
 			await serverComp.RemoveOnlineRole(ActorId);
 			SetAutoRecycle(true); // 下线后会被自动回收
