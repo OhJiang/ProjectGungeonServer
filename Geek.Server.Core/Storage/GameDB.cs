@@ -9,6 +9,7 @@
         public Task<TState> SaveState<TState>(TState state) where TState : CacheState;
         public Task<TState> LoadState<TState, TValue1, TValue2>(string field1, TValue1 value1, string field2, TValue2 value2, Func<TState> defaultGetter = null) where TState : CacheState, new();
         public StateQueryBuilder<TState> CreateQueryBuilder<TState>() where TState : CacheState, new();
+        public Task<MongoDBConnection> UpdateField<TState, TValue>(long id, string fieldName, TValue fieldValue) where TState : CacheState, new();
     }
 
     public class GameDB
@@ -62,5 +63,10 @@
         {
             return dbImpler.CreateQueryBuilder<TState>();
         }
+
+        public static Task<MongoDBConnection> UpdateField<TState, TValue>(long id, string fieldName, TValue fieldValue) where TState : CacheState, new()
+        {
+            return dbImpler.UpdateField<TState, TValue>(id, fieldName, fieldValue);
+        } 
     }
 }

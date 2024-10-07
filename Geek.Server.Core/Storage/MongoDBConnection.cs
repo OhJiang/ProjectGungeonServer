@@ -86,6 +86,16 @@ namespace Geek.Server.Core.Storage
             return  null;
         }
 
+        public async Task<MongoDBConnection> UpdateField<TState, TValue>(long id, string fieldName, TValue fieldValue) where TState : CacheState, new()
+        {
+            var filter = Builders<TState>.Filter.Eq(CacheState.UniqueId, id);
+            var update = Builders<TState>.Update.Set(fieldName, fieldValue);
+            var stateName = typeof(TState).FullName;
+            var col = CurDB.GetCollection<TState>(stateName);
+            var result = await col.UpdateOneAsync(filter, update);
+            return this;
+        }
+
         public StateQueryBuilder<TState> CreateQueryBuilder<TState>() where TState : CacheState, new()
         {
             return new StateQueryBuilder<TState>(CurDB);
